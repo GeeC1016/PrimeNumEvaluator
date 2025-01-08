@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Prime Number Calculator</title>
+    <!--css stylesheet-->
+    <link rel="stylesheet" href="CSS/styles.css">
+    <!--h1 google font-->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Gasoek+One&family=Outfit:wght@100..900&family=Rammetto+One&family=Rubik+Mono+One&family=Spline+Sans+Mono:ital,wght@0,300..700;1,300..700&family=Young+Serif&display=swap" rel="stylesheet">
+</head>
+<body>
+    <h1>Prime Number Evaluation Calculator</h1>
+    <h2>Is this number prime?</h2>
+    <div class="prime-input">
+        <label for="num">Please enter a whole number</label>
+        <input type="text" name="num" id="num">
+        <button id="eval-btn" onclick="evalPrime()">Evaluate</button>
+    </div>
+    
+    <div id="result"></div>
+    <button id="redo-btn" onclick="startOver()">Start Over</button>
+    <script src="JS/index.js"></script>
+</body>
+</html>
