@@ -15,13 +15,16 @@
     <h1>Prime Number Evaluation Calculator</h1>
     <h2>Is this number prime?</h2>
     <div class="prime-input">
-        <label for="num">Please enter a whole number</label>
-        <input type="text" name="num" id="num">
-        <button id="eval-btn" onclick="evalPrime()">Evaluate</button>
+        <div class = "pewn">
+            <label for="num">Please enter a whole number</label>
+            <input type="text" name="num" id="num" >
+        </div>
+        <div id="error-msg"></div>
+        <button id="eval-btn" onclick="handleUserInput()">Evaluate</button>
     </div>
     
     <div id="result"></div>
     <button id="redo-btn" onclick="startOver()">Start Over</button>
-    <script src="JS/index.js"></script>
 </body>
+<script src="JS/index.js"></script>
 </html>
