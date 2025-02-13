@@ -1,55 +1,138 @@
-//Global variable declerations
-let input = document.getElementById("num");
-let evalBttn = document.getElementById("eval-btn");
-let result = document.getElementById("result");
-let redoBttn = document.getElementById("redo-btn");
-let inputVal = document.getElementById("num").value;
-let primeMsg; 
-
-//remove redo button
-redoBttn.style.display = "none";
-
-//Click on Evaluate button
-function evalPrime(){
-    result.innerText = getNum(); //result div set to prime message returned in getNum()
-    evalBttn.style.display = "none";
-    redoBttn.style.display = "inline-block";
+window.onload = function start(){
+  let input = document.getElementById("num");
+  let errorMsgField = document.getElementById("error-msg");
+  let evalBttn = document.getElementById("eval-btn");
+  let result = document.getElementById("result");
+  let startOverBttn = document.getElementById("redo-btn");
+  input.innerText = "";
+  errorMsgField.innerText = "";
+  evalBttn.style.visibility = "visible";
+  result.innerText = "";
+  startOverBttn.style.visibility = "hidden";
+  
 }
 
-//Click on Start Over button
+//************************************************************
+//calculate prime logic
+//************************************************************
+function primeCalc(n){
+  //declerations
+  let isPrime = true;
+  for (let divisor = n-1; divisor > 1; divisor--){
+    if (n % divisor === 0){
+    isPrime = false;
+    divisor = 1;
+    }
+  }
+  return isPrime;
+}
+
+
+
+//************************************************************
+//empty input
+//************************************************************
+function error(n){
+  let myError = "";
+  let trimInput = n.trim();
+  let num = Number(n);
+  if (trimInput === ""){
+    myError = "Please enter a whole number greater than or equal to 2";
+  }else if(n.includes(".")){
+    //find "." location
+    let dotIndex = n.indexOf(".");
+    let StringEnding = n.slice(dotIndex);
+    //each character in string ending should only equal 0
+    //if a character is equal to something other than 0 then throw error
+    for (i = 0; i < StringEnding.length; i++){
+      if (StringEnding[i] !== "0"){
+        myError = "Please enter a whole number greater than or equal to 2";
+        i = StringEnding.length;
+      }
+    }
+  }else if (!num){
+    myError = "Please enter a whole number greater than or equal to 2";
+  }else if (num < 2){ 
+    myError = "Please enter a whole number greater than or equal to 2"; 
+  }
+  return myError;
+}
+
+
+//************************************************************
+//invalid decimal input
+//************************************************************
+
+//************************************************************
+//not a number error
+//************************************************************
+
+//************************************************************
+//less than 2 error
+//************************************************************
+
+//************************************************************
+//function when user presses start over button
+//************************************************************
 function startOver(){
-    evalBttn.style.display = "inline-block";
-    redoBttn.style.display = "none";
-    result.innerText = ""; //result set to empty value
+  let errorMsgField = document.getElementById("error-msg");
+  let evalBttn = document.getElementById("eval-btn");
+  let result = document.getElementById("result");
+  let startOverBttn = document.getElementById("redo-btn");
+  
+  errorMsgField.innerText = "";
+  evalBttn.style.display = "inline-block";
+  result.innerText = "";
+  startOverBttn.style.visibility = "hidden";
+  
+  }
+
+
+
+//************************************************************
+//function - handles user input
+//************************************************************
+function handleUserInput(){
+  //DOM declerations
+  let input = document.getElementById("num");
+  let errorMsgField = document.getElementById("error-msg");
+  let evalBttn = document.getElementById("eval-btn");
+  let result = document.getElementById("result");
+  let startOverBttn = document.getElementById("redo-btn");
+
+  //Value declerations
+  let inputText = "";
+  errorMsgField.innerText = "";
+
+  if (error(input.value) !== ""){
+    let myError = "Please enter a whole number greater than or equal to 2.";
+    errorMsgField.innerText = myError;
+    throw new Error(myError);
+  }else{
+    inputText = input.value;
+    let isPrime = primeCalc(inputText);
+    console.log(inputText)
+    console.log(typeof inputText)
+
+    evalBttn.style.display = "none";
+    startOverBttn.style.visibility = "visible";
+
+    if (isPrime === true){
+      result.innerText = `${inputText} is a prime number`;
+    }else{
+      result.innerText = `${inputText} is NOT a prime number`;
+    }
+    console.log(result.innerText);
+  }
 }
 
-//Calculate whether user input is a prime number
-function getNum(){
-    let remainder;
-    let divisor = inputVal - 1;
 
-    //errors and exceptions
-    if(inputVal < 1){
-        primeMsg = "Error. Start over."
-    }
-    else if(inputVal == 1 || inputVal == 2){
-        primeMsg = `${inputVal} is prime`;
-    }
 
-    //prime number calculation
-    while (divisor > 1){
-        remainder = inputVal % divisor;
-       
-        console.log(`${inputVal} / ${divisor} has a remainder of ${remainder}`)
 
-        if(remainder === 0){
-            primeMsg = `${inputVal} is not prime`;
-            divisor = 1;
 
-        }else{
-            primeMsg = `${inputVal} is prime`;
-        }
-        divisor--;
-    }
-    return primeMsg;
-}
+// console.log(errorMessages("n"));
+// console.log(errorMessages(1));
+// console.log(errorMessages(1));
+
+//throw new Error
+
